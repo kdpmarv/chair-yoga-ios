@@ -11,6 +11,7 @@ workflows:
         bundle_identifier: com.readwithlena.chairyoga
       vars:
         XCODE_SCHEME: "MoveWithLena"
+        BUNDLE_ID: "com.readwithlena.chairyoga"
       xcode: latest
     scripts:
       - name: Install CocoaPods dependencies
@@ -18,6 +19,11 @@ workflows:
           find . -name "Podfile" -execdir pod install \;
       - name: Set up code signing
         script: |
+          app-store-connect fetch-signing-files "$BUNDLE_ID" \
+            --type IOS_APP_STORE \
+            --create
+          keychain initialize
+          keychain add-certificates
           xcode-project use-profiles
       - name: Build ipa for App Store
         script: |
