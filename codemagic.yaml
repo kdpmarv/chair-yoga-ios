@@ -6,9 +6,6 @@ workflows:
     integrations:
       app_store_connect: MoveWithLena
     environment:
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.readwithlena.chairyoga
       groups:
         - ios_signing
       vars:
