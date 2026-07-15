@@ -18,8 +18,15 @@ workflows:
           xcode-project use-profiles
       - name: Build ipa for App Store
         script: |
-          xcode-project build-ipa \
-            --scheme "$XCODE_SCHEME"
+          WORKSPACE_PATH=$(find . -maxdepth 3 -name "*.xcworkspace" | head -1)
+          PROJECT_PATH=$(find . -maxdepth 3 -name "*.xcodeproj" | head -1)
+          echo "Workspace found: $WORKSPACE_PATH"
+          echo "Project found: $PROJECT_PATH"
+          if [ -n "$WORKSPACE_PATH" ]; then
+            xcode-project build-ipa --workspace "$WORKSPACE_PATH" --scheme "$XCODE_SCHEME"
+          else
+            xcode-project build-ipa --project "$PROJECT_PATH" --scheme "$XCODE_SCHEME"
+          fi
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
