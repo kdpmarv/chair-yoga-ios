@@ -10,7 +10,7 @@ workflows:
         - ios_signing
       vars:
         XCODE_SCHEME: "MoveWithLena"
-        BUNDLE_ID: "com.readwithlena.chairyoga"
+        BUNDLE_ID: "com.base6a2f59489b82d2022df92eb7.app"
       xcode: 16.2
     scripts:
       - name: Install CocoaPods dependencies
