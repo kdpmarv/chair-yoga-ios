@@ -9,6 +9,8 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.readwithlena.chairyoga
+      groups:
+        - ios_signing
       vars:
         XCODE_SCHEME: "MoveWithLena"
         BUNDLE_ID: "com.readwithlena.chairyoga"
@@ -19,10 +21,11 @@ workflows:
           find . -name "Podfile" -execdir pod install \;
       - name: Set up code signing
         script: |
+          keychain initialize
           app-store-connect fetch-signing-files "$BUNDLE_ID" \
             --type IOS_APP_STORE \
+            --certificate-key=@env:CERTIFICATE_PRIVATE_KEY \
             --create
-          keychain initialize
           keychain add-certificates
           xcode-project use-profiles
       - name: Build ipa for App Store
