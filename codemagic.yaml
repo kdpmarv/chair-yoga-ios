@@ -32,6 +32,7 @@ workflows:
           xcode-project build-ipa --workspace "$WORKSPACE_PATH" --scheme "$XCODE_SCHEME"
     artifacts:
       - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
     publishing:
       app_store_connect:
         auth: integration
