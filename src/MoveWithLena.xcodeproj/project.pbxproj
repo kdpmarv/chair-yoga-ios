@@ -380,7 +380,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 1.1;
 				CURRENT_PROJECT_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.base6a2f59489b82d2022df92eb7.app";
 				PRODUCT_NAME = "MoveWithLena";
@@ -408,7 +408,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 1.1;
 				CURRENT_PROJECT_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.base6a2f59489b82d2022df92eb7.app";
 				PRODUCT_NAME = "MoveWithLena";
