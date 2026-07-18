@@ -16,6 +16,15 @@ workflows:
       - name: Install CocoaPods dependencies
         script: |
           find . -name "Podfile" -execdir pod install \;
+      - name: Bump build number
+        script: |
+          BUILD_NUMBER=$(date +%Y%m%d%H%M)
+          echo "New build number: $BUILD_NUMBER"
+          PBXPROJ=$(find . -name "project.pbxproj" | head -1)
+          sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = $BUILD_NUMBER;/g" "$PBXPROJ"
+          INFOPLIST=$(find . -name "Info.plist" -path "*MoveWithLena*" -not -path "*Frameworks*" | head -1)
+          echo "Info.plist found: $INFOPLIST"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" "$INFOPLIST" || /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD_NUMBER" "$INFOPLIST"
       - name: Set up code signing
         script: |
           keychain initialize
